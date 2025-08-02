@@ -1,6 +1,8 @@
 /.vs
 /bin
+*/bin
 /obj
+*/obj
 /packages
 /Properties
 /wwwroot
@@ -19,13 +21,4 @@
 /tests/WeddingApi.IntegrationTests/obj
 /tests/WeddingApi.IntegrationTests/appsettings.Development.json
 
-tests/WeddingApi.IntegrationTests/obj/Debug/net8.0/WeddingApi.IntegrationTests.AssemblyInfo.cs
-tests/WeddingApi.IntegrationTests/obj/Debug/net8.0/WeddingApi.IntegrationTests.AssemblyInfoInputs.cache
-tests/WeddingApi.IntegrationTests/obj/Debug/net8.0/WeddingApi.IntegrationTests.assets.cache
-tests/WeddingApi.IntegrationTests/obj/Debug/net8.0/WeddingApi.IntegrationTests.csproj.AssemblyReference.cache
-tests/WeddingApi.IntegrationTests/obj/Debug/net8.0/WeddingApi.IntegrationTests.GeneratedMSBuildEditorConfig.editorconfig
-tests/WeddingApi.IntegrationTests/obj/project.assets.json
-tests/WeddingApi.IntegrationTests/obj/project.nuget.cache
-tests/WeddingApi.IntegrationTests/obj/WeddingApi.IntegrationTests.csproj.nuget.dgspec.json
-tests/WeddingApi.IntegrationTests/obj/WeddingApi.IntegrationTests.csproj.nuget.g.props
 *.cache
