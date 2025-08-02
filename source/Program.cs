@@ -4,6 +4,7 @@ using WeddingAPI.Models;
 using WeddingAPI.Services.Interfaces;
 using WeddingAPI.Repository.Interfaces;
 using WeddingAPI.Services;
+using WeddingAPI.Helpers;
 using Microsoft.OpenApi.Models;
 
 namespace WeddingAPI;
@@ -43,8 +44,8 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        WeddingApi.MapEndpoints(app);
-        
+        EndpointMapper.MapAllEndpoints(app);
+
         app.Run();
     }
 }
