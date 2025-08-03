@@ -95,6 +95,51 @@ resource "azurerm_key_vault_secret" "database_connection_string" {
   ]
 }
 
+data "azurerm_key_vault_secret" "jwt_secret_key" {
+  name         = "JwtSecretKey${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_wedding_frontend_secret" {
+  name         = "ClientWeddingFrontendSecret${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_admin_secret" {
+  name         = "ClientAdminSecret${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "jwt_issuer" {
+  name         = "JwtIssuer${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "jwt_audience" {
+  name         = "JwtAudience${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_wedding_frontend_id" {
+  name         = "ClientWeddingFrontendId${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_wedding_frontend_name" {
+  name         = "ClientWeddingFrontendName${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_admin_id" {
+  name         = "ClientAdminId${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
+data "azurerm_key_vault_secret" "client_admin_name" {
+  name         = "ClientAdminName${local.environment}"
+  key_vault_id = data.azurerm_key_vault.wedding_api_kv.id
+}
+
 resource "azurerm_linux_web_app" "wedding_api" {
   name                = "wedding-api-${local.environment}"
   resource_group_name = azurerm_resource_group.wedding_api_env_rg.name
@@ -116,7 +161,22 @@ resource "azurerm_linux_web_app" "wedding_api" {
   app_settings = {
     "ASPNETCORE_ENVIRONMENT"                 = local.environment == "dev" ? "Development" : "Production",
     "WEBSITE_RUN_FROM_PACKAGE"               = "1",
-    "ConnectionStrings__DefaultConnection"   = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.database_connection_string.id})"
+    "ConnectionStrings__DefaultConnection"   = "@Microsoft.KeyVault(SecretUri=${azurerm_key_vault_secret.database_connection_string.id})",
+    
+    "JWT__SecretKey"                         = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.jwt_secret_key.id})",
+    "JWT__Issuer"                            = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.jwt_issuer.id})",
+    "JWT__Audience"                          = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.jwt_audience.id})",
+    "JWT__ExpiryHours"                       = "24",
+    
+    "ApiClients__0__ClientId"                = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_wedding_frontend_id.id})",
+    "ApiClients__0__ClientSecret"            = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_wedding_frontend_secret.id})",
+    "ApiClients__0__ClientName"              = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_wedding_frontend_name.id})",
+    "ApiClients__0__IsActive"                = "true",
+    
+    "ApiClients__1__ClientId"                = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_admin_id.id})",
+    "ApiClients__1__ClientSecret"            = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_admin_secret.id})",
+    "ApiClients__1__ClientName"              = "@Microsoft.KeyVault(SecretUri=${data.azurerm_key_vault_secret.client_admin_name.id})",
+    "ApiClients__1__IsActive"                = "true"
   }
 
   depends_on = [
