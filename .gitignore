@@ -1,24 +1,68 @@
-/.vs
-/bin
-*/bin
-/obj
-*/obj
-/packages
-/Properties
-/wwwroot
-/source/obj
-/source/bin
-/source/Properties
-/source/wwwroot
-/source/appsettings.Development.json
-/source/appsettings.json
-/source/appsettings.Production.json
-/source/appsettings.Staging.json
-/tests/WeddingApi.UnitTests/bin
-/tests/WeddingApi.UnitTests/obj
-/tests/WeddingApi.UnitTests/appsettings.Development.json
-/tests/WeddingApi.IntegrationTests/bin
-/tests/WeddingApi.IntegrationTests/obj
-/tests/WeddingApi.IntegrationTests/appsettings.Development.json
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
 
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+*.dll
+*.exe
+*.pdb
 *.cache
+*.tmp
+
+# NuGet
+packages/
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+
+# Environment-specific appsettings (keep base appsettings.json)
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/appsettings.Staging.json
+**/appsettings.Local.json
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Coverage results
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
