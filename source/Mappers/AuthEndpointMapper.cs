@@ -12,13 +12,7 @@ public class AuthEndpointMapper : IEndpointMapper
         .WithTags("Authentication")
         .WithOpenApi();
 
-    MapTokenEndpoint(auth);
-    MapValidateEndpoint(auth);
-  }
-
-  private static void MapTokenEndpoint(RouteGroupBuilder endpoints)
-  {
-    endpoints.MapPost("/token", ([FromBody] TokenRequest request,
+    auth.MapPost("/token", ([FromBody] TokenRequest request,
         ITokenService tokenService,
         List<ClientCredentials> clientCredentials,
         JwtSettings jwtSettings) =>
@@ -53,11 +47,8 @@ public class AuthEndpointMapper : IEndpointMapper
     .WithName("GetClientToken")
     .WithDescription("Get access token using client credentials")
     .AllowAnonymous();
-  }
 
-  private static void MapValidateEndpoint(RouteGroupBuilder endpoints)
-  {
-    endpoints.MapPost("/validate", ([FromBody] TokenRequest request, List<ClientCredentials> clientCredentials) =>
+    auth.MapPost("/validate", ([FromBody] TokenRequest request, List<ClientCredentials> clientCredentials) =>
     {
       var client = clientCredentials.FirstOrDefault(c =>
               c.ClientId == request.ClientId &&
