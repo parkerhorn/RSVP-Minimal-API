@@ -73,6 +73,7 @@ public class Program
         builder.Services.AddSingleton(jwtSettings);
 
         var clientCredentials = builder.Configuration.GetSection("ApiClients").Get<List<ClientCredentials>>() ?? new List<ClientCredentials>();
+
         builder.Services.AddSingleton(clientCredentials);
 
         builder.Services.AddScoped<ITokenService, TokenService>();
@@ -107,6 +108,7 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthentication();
+        
         app.UseAuthorization();
 
         EndpointMapper.MapEndpoints(app);
