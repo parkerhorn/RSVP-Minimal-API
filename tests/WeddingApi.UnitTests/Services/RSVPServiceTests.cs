@@ -96,7 +96,6 @@ public class RSVPServiceTests
         // Act & Assert
         await Assert.ThrowsAsync<Exception>(() => service.GetAllAsync());
 
-        // Verify logging occurred
         _mockLogger.Verify(
             x => x.Log(
                 LogLevel.Error,

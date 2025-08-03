@@ -14,7 +14,6 @@ public class RepositoryTests : IDisposable
 
     public RepositoryTests()
     {
-        // Create a fresh in-memory database for each test
         _options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
@@ -64,7 +63,7 @@ public class RepositoryTests : IDisposable
         await _unitOfWork.GetGenericAsyncRepository<RSVP>().AddAsync(rsvp);
         await _unitOfWork.SaveChangesAsync(new CancellationToken());
 
-        // Act - Update the RSVP
+        // Act
         var savedRsvp = await _context.RSVPs.FirstOrDefaultAsync(r => r.Email == "jane@example.com");
         savedRsvp.IsAttending = false;
         savedRsvp.Note = "Sorry, can't make it";
@@ -126,7 +125,6 @@ public class RepositoryTests : IDisposable
         }
         await _unitOfWork.SaveChangesAsync(new CancellationToken());
 
-        // Create a service using the repository
         var logger = new NullLogger<GenericAsyncDataService<RSVP, ApplicationDbContext>>();
         var service = new GenericAsyncDataService<RSVP, ApplicationDbContext>(_unitOfWork, logger);
 
