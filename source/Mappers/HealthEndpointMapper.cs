@@ -6,7 +6,7 @@ public class HealthEndpointMapper : IEndpointMapper
 {
   public void MapEndpoints(WebApplication app)
   {
-    app.MapGet("/", () => "Lenny and Parker are getting married!");
+    app.MapGet("/", () => "Root endpoint for the API");
 
     app.MapGet("/health", async (ApplicationDbContext db) =>
     {

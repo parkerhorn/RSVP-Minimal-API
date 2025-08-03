@@ -2,9 +2,9 @@ using System.Reflection;
 
 namespace WeddingAPI.Helpers;
 
-public class EndpointMapper : IEndpointMapper
+public static class EndpointMapper
 {
-  public void MapEndpoints(WebApplication app)
+  public static void MapEndpoints(WebApplication app)
   {
     var mappers = Assembly.GetExecutingAssembly()
         .GetTypes()

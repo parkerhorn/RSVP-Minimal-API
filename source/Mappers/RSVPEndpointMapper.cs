@@ -10,7 +10,7 @@ public class RSVPEndpointMapper : IEndpointMapper
 {
   public void MapEndpoints(WebApplication app)
   {
-    var rsvp = app.MapGroup("/rsvp").WithTags("RSVP").WithOpenApi();
+    var rsvp = app.MapGroup("/rsvp").WithTags("RSVP").WithOpenApi().RequireAuthorization();
 
     rsvp.MapPost("/", async ([FromBody] IEnumerable<RSVP> rsvps, IGenericAsyncDataService<RSVP, ApplicationDbContext> service, IUnitOfWork<ApplicationDbContext> unitOfWork) =>
     {
